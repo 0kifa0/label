@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta content="ie=edge">
     <title>ラベル印刷</title>
 <style>
 @page {
@@ -27,12 +27,14 @@
 	}
 }
 body {
-  	margin: 0;/*だいじ。もとからの隙間をつぶす。*/
+  	margin: 0;
+  	font-family: "メイリオ";
+    font-weight: bold;
 }
 .preview {
     margin: 10 auto;
-    width: 95mm;
-    height: 28mm; /* 2mm余裕をもたせる */
+    width: 80mm;
+    height: 29mm; /* 1mm余裕をもたせる */
     page-break-after: always;
     transform:scale(1);
     transform-origin:top;
@@ -43,7 +45,7 @@ body {
     height: 25mm;  /* トリミングしたい高さ */
     overflow: hidden;
     top: 2mm;
-    left: 69mm;/*ラベル右端狙い*/
+    left: 55mm;/*ラベル右端狙い*/
     position: absolute;
 }
 .trim img {
@@ -60,8 +62,6 @@ body {
     position: absolute;
     top: 1mm;
     left: 2mm;
-    font-family: "メイリオ";
-    font-weight: bold;
     font-size: 18pt;
     line-height: 1 !important;/*行間をつめる*/
 }
@@ -70,38 +70,22 @@ body {
     position: absolute;
     top: 8mm;
     left: 2mm;
-    font-family: "メイリオ";
-    font-weight: bold;
     font-size: 12pt;
     line-height: 1 !important;/*行間をつめる*/
 }
-.hinCode {
+.Code {
     margin: 0;
     position: absolute;
     top: 17mm;
     left: 2mm;
-    font-family: "メイリオ";
-    font-weight: bold;
     font-size: 28pt;
-    line-height: 1 !important;/*行間をつめる*/
-}
-.floor {
-    margin: 0;
-    position: absolute;
-    top: 15mm;
-    left: 55mm;
-    font-family: "メイリオ";
-    font-weight: bold;
-    font-size: 16pt;
     line-height: 1 !important;/*行間をつめる*/
 }
 .date {
     margin: 0;
     position: absolute;
-    top: 21mm;
-    left: 50mm;
-    font-family: "メイリオ";
-    font-weight: bold;
+    top: 17mm;
+    left: 2mm;
     font-size: 16pt;
     line-height: 1 !important;/*行間をつめる*/
 }
@@ -109,9 +93,7 @@ body {
     margin: 0;
     position: absolute;
     top: 1mm;
-    left: 50mm;
-    font-family: "メイリオ";
-    font-weight: bold;
+    left: 40mm;
     font-size: 14pt;
     line-height: 1 !important;/*行間をつめる*/
 }
@@ -120,8 +102,6 @@ body {
     position: absolute;
     top: 7mm;
     left: 55mm;
-    font-family: "メイリオ";
-    font-weight: bold;
     font-size: 14pt;
     line-height: 1 !important;/*行間をつめる*/
 }
@@ -158,20 +138,18 @@ body {
 	<textarea name="csvoutput" cols="80" rows="10"></textarea>
 </form>
 -->
-<!--位置調整用サンプル
-<section class="preview">
+<!-- 位置調整用サンプル -->
+<!-- <section class="preview">
 	<div class="trim">
         <img class="QR" src="http://chart.apis.google.com/chart?cht=qr&chs=130x130&chl=ABC12302023AEPGM" width="130" height="130">
     </div>
 	<p class="order">ABC1234</p>
-	<p class="name">GBパラペット<br>入隅右/袖</p>
-	<p class="hinCode">AEPGM</p>
-	<p class="yard">DA6</p>
-	<p class="quantity">23</p>
-	<p class="floor">2階</p>
-	<p class="date">4/11</p>
-</section>
--->
+	<p class="name">製品名<br>二行目</p>
+	<p class="Code">AEPGM</p>
+	<p class="quantity">23%</p>
+	<p class="date">2018/08/04</p>
+</section> -->
+
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
@@ -192,36 +170,32 @@ document.addEventListener('DOMContentLoaded', function () {
 	//第2引数は文字コードデフォルトはUTF-8
     reader.readAsText(file,"SJIS");
 	reader.addEventListener( 'load', function() {
-	//ファイルの中身をtextarea内に表示(しない
+	//ファイルの中身をtextarea内に表示
 	//myform.csvoutput.textContent = reader.result;    
 	var tmp = reader.result.split("\n"); // 改行を区切り文字として行を要素とした配列を生成
     // 各行ごとにカンマで区切った文字列を要素とした配列を生成
-	var result = []; 
+	//var column = []; 
     for(var i=1;i<tmp.length;++i){
        	result = tmp[i].split(',');
 		var sheet = $('<section class="preview"></section>');
 		var trim = $('<div class="trim"></div>')
-		trim.html('<img class="QR" src="http://chart.apis.google.com/chart?cht=qr&chs=130x130&chl=' + result[0]+ result[3] + result[4] + result[2] + '" width="130" height="130">');
+		trim.html('<img class="QR" src="http://chart.apis.google.com/chart?cht=qr&chs=130x130&chl=' + result[0]+','+ result[3]+',' + result[4] + '" width="130" height="130">');
 		sheet.append(trim);
 		sheet.append('<p class="order">' + result[0] + '</p>');
 		sheet.append('<p class="name">' + result[1].substr(0,12) + '<br>' + result[1].substr(12,12) + '</p>');
-		sheet.append('<p class="hinCode">' + result[2] + '</p>');
-		sheet.append('<p class="floor">' + result[3] + '階</p>');
-		sheet.append('<p class="quantity">' + result[4] + '</p>');
-		sheet.append('<p class="yard">' + result[5] + '</p>');
-		sheet.append('<p class="date">' + result[6] + '</p>');
+		// sheet.append('<p class="Code">' + result[2] + '</p>');
+		sheet.append('<p class="quantity">' + result[3] + '%</p>');
+		sheet.append('<p class="date">' + result[4] + '</p>');
 		$('body').append(sheet);
-    	}
+    	}    
 	})
   }
 
   // ドラッグ中の要素がドロップ要素に重なった時
   dropArea.addEventListener('dragover', function (ev) {
     ev.preventDefault();
-
     // ファイルのコピーを渡すようにする
     ev.dataTransfer.dropEffect = 'copy';
-
     dropArea.classList.add('dragover');
   });
 
@@ -233,9 +207,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // ドロップ要素にドロップされた時
   dropArea.addEventListener('drop', function (ev) {
     ev.preventDefault();
-
     dropArea.classList.remove('dragover');
-    // ev.dataTransfer.files に複数のファイルのリストが入っている
     organizeFiles(ev.dataTransfer.files);
   });
 
@@ -246,8 +218,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // ファイル参照で追加した場合
   fileInput.addEventListener('change', function (ev) {
-
-    // ev.target.files に複数のファイルのリストが入っている
     organizeFiles(ev.target.files);
 
     // 値のリセット
