@@ -13,8 +13,8 @@
 </head>
 <body>
     <h2>Scanner</h2>
-    <button onclick="onStartButton()">Scan Start</button>
-    <button onclick="onStopButton()">Scan Stop</button>
+    <button onclick="onStartButton()">3:黄色</button>
+    <button onclick="onStopButton()">5:マゼンタ</button>
     <br>
     <textarea id="result" placeholder="scan result"></textarea>
     <br>
@@ -39,14 +39,14 @@
 
     //Scan
     function onStartButton() {
-	KJS.Scanner.startRead();
-    KJS.Notification.startLed(1,300,0,1);
+	//KJS.Scanner.startRead();
+    KJS.Notification.startLed(3,300,0,1);
     KJS.Notification.startBuzzer(12,200,100,2);
     }
 
     function onStopButton() {
-	KJS.Scanner.stopRead();
-    KJS.Notification.startLed(2,300,0,1);
+	//KJS.Scanner.stopRead();
+    KJS.Notification.startLed(5,300,0,1);
     KJS.Notification.startBuzzer(11,200,100,2);
     }
 
@@ -56,19 +56,19 @@
         //startLed(1:緑、2:赤、3:黄、4:シアン、5:マゼンタ、6:青、7:白, onPeriod, offPeriod, repeat);
         //startBuzzer(tone, onPeriod, offPeriod, repeatCount);
         //startVibrator(onPeriod, offPeriod, repeatCount);
-        KJS.Notification.startLed(4,300,0,1);
-        KJS.Notification.startBuzzer(10,200,0,1);
+        KJS.Notification.startLed(1,300,0,1);
+        KJS.Notification.startBuzzer(16,200,0,1);
         KJS.Notification.startVibrator(100,0,1);
     }
 
     function onWarning() {
-        KJS.Notification.startLed(6,200,100,2);
+        KJS.Notification.startLed(4,200,100,2);
         KJS.Notification.startBuzzer(9,200,100,2);
         KJS.Notification.startVibrator(200,100,2);
     }
 
     function onFailure() { 
-        KJS.Notification.startLed(7,200,100,2);   
+        KJS.Notification.startLed(2,200,100,2);   
         KJS.Notification.startBuzzer(8,200,100,2);
         KJS.Notification.startVibrator(200,100,2);
     }
