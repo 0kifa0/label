@@ -48,19 +48,25 @@
 
 
     //Notification
-    function onBuzzerButton() {
+    function onSuccsess() {
+        //startLed(1:緑、2:赤、3:黄、4:シアン、5:マゼンタ、6:青、7:白, onPeriod, offPeriod, repeat);
         //startBuzzer(tone, onPeriod, offPeriod, repeatCount);
-        KJS.Notification.onSuccsess(16,100,100,2);
-    }
-
-    function onLEDButton() {
-        //startLed(color, onPeriod, offPeriod, repeatCount);
-        KJS.Notification.startLed(1,1000,0,1);
-    }
-
-    function onVibratorButton() {
         //startVibrator(onPeriod, offPeriod, repeatCount);
-        KJS.Notification.startVibrator(1000,200,2);
+        KJS.Notification.startLed(1,300,0,1);
+        KJS.Notification.startBuzzer(16,200,0,1);
+        KJS.Notification.startVibrator(100,0,1);
+    }
+
+    function onWarning() {
+        KJS.Notification.startLed(3,200,100,2);
+        KJS.Notification.startBuzzer(3,200,100,2);
+        KJS.Notification.startVibrator(200,100,2);
+    }
+
+    function onFailure() { 
+        KJS.Notification.startLed(2,200,100,2);   
+        KJS.Notification.startBuzzer(1,200,100,2);
+        KJS.Notification.startVibrator(200,100,2);
     }
 
 
