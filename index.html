@@ -41,12 +41,13 @@
     function onStartButton() {
 	KJS.Scanner.startRead();
     KJS.Notification.startLed(1,300,0,1);
-    KJS.Notification.startLed(2,300,0,1);
+    KJS.Notification.startBuzzer(14,200,100,2);
     }
 
     function onStopButton() {
 	KJS.Scanner.stopRead();
     KJS.Notification.startLed(2,300,0,1);
+    KJS.Notification.startBuzzer(13,200,100,2);
     }
 
 
@@ -62,7 +63,7 @@
 
     function onWarning() {
         KJS.Notification.startLed(6,200,100,2);
-        KJS.Notification.startBuzzer(2,200,100,2);
+        KJS.Notification.startBuzzer(15,200,100,2);
         KJS.Notification.startVibrator(200,100,2);
     }
 
