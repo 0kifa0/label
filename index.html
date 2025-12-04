@@ -31,6 +31,7 @@
 	//Set Callback Event as a Scan Event
         //KJS.Scanner.setReadCallback('resultCallback');
         console.log(window.KJS?.Notification);
+        console.log(window.KJS?.Scanner?._scanManager);
     }
 
     //Event on code scanned.
@@ -46,9 +47,11 @@
     }
 
     function onStopButton() {
-	//KJS.Scanner.stopRead();
-    KJS.Notification.startLed(5,300,0,1);
-    KJS.Notification.startBuzzer(11,200,100,2);
+        if(window.KJS?.Scanner?._scanManager){
+        	//KJS.Scanner.stopRead();
+            KJS.Notification.startLed(5,300,0,1);
+            KJS.Notification.startBuzzer(11,200,100,2);
+        }
     }
 
 
