@@ -19,7 +19,7 @@
     <textarea id="result" placeholder="scan result"></textarea>
     <br>
     <h2>Notification</h2>
-    <button onclick="onSuccsess()">正常</button>
+    <button onclick="onSuccess()">正常</button>
     <button onclick="onWarning()">警告</button>
     <button onclick="onFailure()">失敗</button>
 </body>
@@ -52,13 +52,14 @@
 
 
     //Notification
-    function onSuccsess() {
+    function onSuccess() {
         //startLed(1:緑、2:赤、3:黄、4:シアン、5:マゼンタ、6:青、7:白, onPeriod, offPeriod, repeat);
         //startBuzzer(tone, onPeriod, offPeriod, repeatCount);
         //startVibrator(onPeriod, offPeriod, repeatCount);
-        KJS.Notification.startLed(1,300,0,1);
-        KJS.Notification.startBuzzer(16,200,0,1);
-        KJS.Notification.startVibrator(100,0,1);
+        //正常書き込み成功時は何もしない。読取成功と被って感触悪い。
+        // KJS.Notification.startLed(1,300,0,1);
+        // KJS.Notification.startBuzzer(16,200,0,1);
+        // KJS.Notification.startVibrator(100,0,1);
     }
 
     function onWarning() {
