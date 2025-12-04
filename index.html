@@ -27,10 +27,13 @@
 
 <script>
 
-    // window.onload = function() {
-	// //Set Callback Event as a Scan Event
-    //     KJS.Scanner.setReadCallback('resultCallback')
-    // }
+    window.onload = function() {
+	//Set Callback Event as a Scan Event
+        KJS.Scanner.setReadCallback('resultCallback');
+        console.log(window.KJS?.Notification);
+        console.log(window.KJS?.Scanner?._scanManager);
+        console.log(window.KJS?.Scanner?.setReadCallback);
+    }
 
     //Event on code scanned.
     // function resultCallback(result) {
